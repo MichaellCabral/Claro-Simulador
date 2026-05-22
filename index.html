@@ -17,7 +17,7 @@
 
     <section class="catalogo">
 
-      <div class="produto" onclick="selecionarInternet('350 Megas', 99.99)">
+      <div class="produto" onclick="selecionarInternet('350 Megas', 99.90)">
         <h2>350 Megas</h2>
         <p>Clique para ver</p>
       </div>
@@ -68,7 +68,7 @@
 
         <h2>Total: R$ <span id="valorFinal">0,00</span></h2>
 
-        <small>* Valores com desconto no débito automático</small>
+        <small>* Valores com 5.00 R$ de desconto no débito automático</small>
 
       </div>
 
@@ -76,50 +76,8 @@
 
   </main>
 
-  <script>
-
-    let internetNome = "";
-    let internetValor = 0;
-
-    let chipNome = "";
-    let chipValor = 0;
-
-    function selecionarInternet(nome, valor) {
-
-      internetNome = nome;
-      internetValor = valor;
-
-      document.getElementById("internetSelecionada").innerHTML =
-        `${nome} - R$ ${valor.toFixed(2).replace('.', ',')}`;
-
-      atualizarResumo();
-    }
-
-    function selecionarChip(nome, valor) {
-
-      chipNome = nome;
-      chipValor = valor;
-
-      atualizarResumo();
-    }
-
-    function atualizarResumo() {
-
-      let total = internetValor + chipValor;
-
-      document.getElementById("nomeInternet").innerText = internetNome;
-      document.getElementById("valorInternet").innerText =
-        internetValor.toFixed(2).replace('.', ',');
-
-      document.getElementById("nomeChip").innerText = chipNome;
-      document.getElementById("valorChip").innerText =
-        chipValor.toFixed(2).replace('.', ',');
-
-      document.getElementById("valorFinal").innerText =
-        total.toFixed(2).replace('.', ',');
-    }
-
-  </script>
+  <script src="script.js"></script>
+  
 
 </body>
 </html>

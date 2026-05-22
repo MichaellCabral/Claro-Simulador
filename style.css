@@ -90,6 +90,15 @@ header p{
   inset 0 0 30px #ff000033;
 }
 
+.produto.selecionado{
+  background:rgba(255, 0, 0, 0.3);
+  border:3px solid #ffff00;
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:
+  0 0 40px #ffff00,
+  inset 0 0 40px #ffff0044;
+}
+
 .produto h2{
   font-size:38px;
   margin-bottom:10px;
@@ -164,6 +173,15 @@ header p{
   box-shadow:
   0 0 25px red,
   inset 0 0 30px #ff000044;
+}
+
+.chip.selecionado{
+  background:rgba(255, 0, 0, 0.3);
+  border:3px solid #ffff00;
+  transform:scale(1.08);
+  box-shadow:
+  0 0 40px #ffff00,
+  inset 0 0 40px #ffff0044;
 }
 
 .chip h3{
@@ -277,7 +295,8 @@ hr{
 
   .produto,
   .chip{
-    width:100%;
+    width:90%;
+    
   }
 
   .beneficios{
