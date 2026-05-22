@@ -1,0 +1,290 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:
+  radial-gradient(circle at top,#ff1a1a33,transparent 30%),
+  linear-gradient(180deg,#160000,#300000,#120000);
+  color:white;
+  min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+  padding:50px 20px 30px;
+  text-align:center;
+  position:relative;
+}
+
+.logo{
+  width:260px;
+  margin-bottom:20px;
+  filter:drop-shadow(0 0 15px #ff0000);
+}
+
+header h1{
+  font-size:48px;
+  color:white;
+  text-shadow:0 0 20px red;
+  margin-bottom:10px;
+}
+
+header p{
+  color:#ffd5d5;
+  font-size:18px;
+}
+
+/* CATALOGO */
+
+.catalogo{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:25px;
+  padding:30px 20px;
+}
+
+/* CARD PLANOS */
+
+.produto{
+  width:280px;
+  background:rgba(80,0,0,0.75);
+  border:2px solid #ff2d2d;
+  border-radius:20px;
+  padding:30px;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:0.3s;
+  box-shadow:
+  0 0 15px #ff000066,
+  inset 0 0 20px #ff000022;
+}
+
+.produto::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:linear-gradient(
+    45deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+  transform:rotate(25deg);
+}
+
+.produto:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:
+  0 0 25px #ff0000,
+  inset 0 0 30px #ff000033;
+}
+
+.produto h2{
+  font-size:38px;
+  margin-bottom:10px;
+  color:white;
+  text-shadow:0 0 10px red;
+}
+
+.produto .valor{
+  font-size:42px;
+  color:#ffd000;
+  font-weight:bold;
+  text-shadow:0 0 15px #ff9900;
+}
+
+.produto span{
+  display:block;
+  margin-top:10px;
+  color:#ffcccc;
+}
+
+/* DETALHES */
+
+.detalhes{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* INTERNET ESCOLHIDA */
+
+.box{
+  background:rgba(50,0,0,0.8);
+  border:2px solid #ff2d2d;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:30px;
+  box-shadow:0 0 20px #ff000055;
+}
+
+.box h3{
+  color:#ffd000;
+  margin-bottom:10px;
+  font-size:24px;
+}
+
+/* CHIPS */
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.chip{
+  width:260px;
+  background:rgba(70,0,0,0.85);
+  border:2px solid #ff2d2d;
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:
+  0 0 15px #ff000044,
+  inset 0 0 20px #ff000022;
+}
+
+.chip:hover{
+  transform:scale(1.05);
+  box-shadow:
+  0 0 25px red,
+  inset 0 0 30px #ff000044;
+}
+
+.chip h3{
+  font-size:32px;
+  color:white;
+  margin-bottom:10px;
+  text-shadow:0 0 10px red;
+}
+
+.chip .valor-chip{
+  font-size:34px;
+  color:#ffd000;
+  font-weight:bold;
+  text-shadow:0 0 10px orange;
+}
+
+/* RESULTADO */
+
+.resultado{
+  background:rgba(45,0,0,0.92);
+  border:2px solid #ff2d2d;
+  border-radius:25px;
+  padding:35px;
+  box-shadow:
+  0 0 25px #ff000055,
+  inset 0 0 30px #ff000022;
+}
+
+.resultado h2{
+  color:#ffd000;
+  margin-bottom:20px;
+  font-size:34px;
+  text-shadow:0 0 10px orange;
+}
+
+.resultado p{
+  font-size:22px;
+  margin-bottom:15px;
+}
+
+.resultado strong{
+  color:white;
+}
+
+#valorFinal{
+  color:#ffd000;
+  font-size:48px;
+  font-weight:bold;
+  text-shadow:0 0 15px orange;
+}
+
+/* BENEFICIOS */
+
+.beneficios{
+  margin-top:35px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.beneficio-card{
+  background:rgba(255,255,255,0.08);
+  border:2px solid #ff2d2d;
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 0 15px #ff000033;
+}
+
+.beneficio-card h3{
+  color:#ffd000;
+  margin-bottom:10px;
+  font-size:26px;
+}
+
+.beneficio-card p{
+  color:#fff;
+  font-size:18px;
+}
+
+/* GLOBOPLAY */
+
+.globoplay{
+  font-size:42px;
+  font-weight:bold;
+  color:white;
+}
+
+.globoplay span{
+  color:#ff2d2d;
+  text-shadow:0 0 10px red;
+}
+
+/* LINHAS */
+
+hr{
+  border:none;
+  height:1px;
+  background:#ff2d2d;
+  margin:25px 0;
+  box-shadow:0 0 10px red;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+
+  header h1{
+    font-size:34px;
+  }
+
+  .produto,
+  .chip{
+    width:100%;
+  }
+
+  .beneficios{
+    grid-template-columns:1fr;
+  }
+
+  #valorFinal{
+    font-size:40px;
+  }
+}

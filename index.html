@@ -3,88 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Claro Fibra</title>
-
+  <title>Catálogo Claro</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="topo">
-    <h1>Claro Fibra Óptica</h1>
-    <p>Internet ultra rápida para sua casa</p>
+  <header>
+    <h1>CLARO INTERNET</h1>
+    <p>Escolha sua internet e monte seu combo</p>
   </header>
 
-  <section class="banner">
-    <div class="banner-texto">
-      <h2>Planos com instalação grátis</h2>
-      <p>Escolha o melhor plano para você</p>
-    </div>
-  </section>
+  <main>
 
-  <section class="planos">
+    <section class="catalogo">
 
-    <div class="card">
-      <h2>350 MEGAS</h2>
-      <p class="sub">Fibra Óptica</p>
-      <h3>R$ 99,90</h3>
-      <ul>
-        <li>Wi-Fi Grátis</li>
-        <li>Instalação grátis</li>
-        <li>Globoplay incluso</li>
-      </ul>
-    </div>
+      <div class="produto" onclick="selecionarInternet('350 Megas', 99.99)">
+        <h2>350 Megas</h2>
+        <p>Clique para ver</p>
+      </div>
 
-    <div class="card destaque">
-      <h2>500 MEGAS</h2>
-      <p class="sub">Plano Mais Vendido</p>
-      <h3>R$ 119,90</h3>
-      <ul>
-        <li>Ultra velocidade</li>
-        <li>Wi-Fi Grátis</li>
-        <li>Instalação grátis</li>
-      </ul>
-    </div>
+      <div class="produto" onclick="selecionarInternet('500 Megas', 119.90)">
+        <h2>500 Megas</h2>
+        <p>Clique para ver</p>
+      </div>
 
-    <div class="card">
-      <h2>1 GIGA</h2>
-      <p class="sub">Máxima Performance</p>
-      <h3>R$ 149,90</h3>
-      <ul>
-        <li>Ideal para gamers</li>
-        <li>Streaming sem travar</li>
-        <li>Globoplay incluso</li>
-      </ul>
-    </div>
+      <div class="produto" onclick="selecionarInternet('1 Giga', 199.90)">
+        <h2>1 Giga</h2>
+        <p>Clique para ver</p>
+      </div>
 
-  </section>
+    </section>
 
-  <section class="combos">
+    <section class="detalhes">
 
-    <h2 class="titulo-combo">Combos Internet + Chip</h2>
+      <div class="box">
+        <h3>Internet Selecionada</h3>
+        <p id="internetSelecionada">Nenhuma selecionada</p>
+      </div>
 
-    <div class="combo-card">
-      <h3>350 Megas + Chip 30GB</h3>
-      <p>Por apenas</p>
-      <span>R$ 129,80</span>
-    </div>
+      <div class="chips">
 
-    <div class="combo-card">
-      <h3>500 Megas + Chip 50GB</h3>
-      <p>Por apenas</p>
-      <span>R$ 159,90</span>
-    </div>
+        <div class="chip" onclick="selecionarChip('30GB', 49.90)">
+          <h3>Chip 30GB</h3>
+          <p>Adicionar</p>
+        </div>
 
-    <div class="combo-card">
-      <h3>1 Giga + Chip 50GB</h3>
-      <p>Por apenas</p>
-      <span>R$ 229,90</span>
-    </div>
+        <div class="chip" onclick="selecionarChip('50GB', 80.00)">
+          <h3>Chip 50GB</h3>
+          <p>Adicionar</p>
+        </div>
 
-  </section>
+      </div>
 
-  <footer>
-    <p>© 2026 Claro Fibra - Catálogo Digital</p>
-  </footer>
+      <div class="resultado">
+        <h2>Resumo do Combo</h2>
+
+        <p><strong>Internet:</strong> <span id="nomeInternet">-</span></p>
+        <p><strong>Valor Internet:</strong> R$ <span id="valorInternet">0,00</span></p>
+
+        <p><strong>Chip:</strong> <span id="nomeChip">-</span></p>
+        <p><strong>Valor Chip:</strong> R$ <span id="valorChip">0,00</span></p>
+
+        <hr>
+
+        <h2>Total: R$ <span id="valorFinal">0,00</span></h2>
+
+        <small>* Valores com desconto no débito automático</small>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    let internetNome = "";
+    let internetValor = 0;
+
+    let chipNome = "";
+    let chipValor = 0;
+
+    function selecionarInternet(nome, valor) {
+
+      internetNome = nome;
+      internetValor = valor;
+
+      document.getElementById("internetSelecionada").innerHTML =
+        `${nome} - R$ ${valor.toFixed(2).replace('.', ',')}`;
+
+      atualizarResumo();
+    }
+
+    function selecionarChip(nome, valor) {
+
+      chipNome = nome;
+      chipValor = valor;
+
+      atualizarResumo();
+    }
+
+    function atualizarResumo() {
+
+      let total = internetValor + chipValor;
+
+      document.getElementById("nomeInternet").innerText = internetNome;
+      document.getElementById("valorInternet").innerText =
+        internetValor.toFixed(2).replace('.', ',');
+
+      document.getElementById("nomeChip").innerText = chipNome;
+      document.getElementById("valorChip").innerText =
+        chipValor.toFixed(2).replace('.', ',');
+
+      document.getElementById("valorFinal").innerText =
+        total.toFixed(2).replace('.', ',');
+    }
+
+  </script>
 
 </body>
 </html>
