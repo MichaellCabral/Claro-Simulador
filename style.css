@@ -24,7 +24,7 @@ header{
 .logo{
   width:260px;
   margin-bottom:20px;
-  filter:drop-shadow(0 0 15px #ff0000);
+  filter:drop-shadow(0 0 15px #ff0000);/* Efeito de brilho vermelho para o logo */
 }
 
 header h1{
@@ -44,9 +44,9 @@ header p{
 .catalogo{
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:space-evenly;
   gap:25px;
-  padding:30px 20px;
+  padding:15px 30px;
 }
 
 /* CARD PLANOS */
@@ -86,7 +86,7 @@ header p{
 .produto:hover{
   transform:translateY(-8px) scale(1.02);
   box-shadow:
-  0 0 25px #ff0000,
+  0 0 20px #ff0000,
   inset 0 0 30px #ff000033;
 }
 
@@ -287,23 +287,288 @@ hr{
 
 /* RESPONSIVO */
 
-@media(max-width:768px){
+/* Tela pequena - Celular (até 480px) */
+@media(max-width:480px){
+
+  header{
+    padding:20px 10px 15px;
+  }
 
   header h1{
-    font-size:34px;
+    font-size:22px;
   }
 
-  .produto,
+  header p{
+    font-size:12px;
+  }
+
+  .catalogo{
+    padding:8px 10px;
+    gap:12px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+  .produto{
+    width:100%;
+    padding:15px;
+  }
+
+  .produto h2{
+    font-size:18px;
+    margin-bottom:6px;
+  }
+
+  .produto .valor{
+    font-size:20px;
+  }
+
+  .produto span{
+    font-size:10px;
+    margin-top:6px;
+  }
+
+  .chips{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+
   .chip{
-    width:90%;
-    
+    width:100%;
+    padding:14px;
   }
 
-  .beneficios{
-    grid-template-columns:1fr;
+  .chip h3{
+    font-size:16px;
+    margin-bottom:6px;
+  }
+
+  .chip .valor-chip{
+    font-size:18px;
+  }
+
+  .detalhes{
+    padding:12px;
+  }
+
+  .box{
+    padding:14px;
+    margin-bottom:15px;
+  }
+
+  .box h3{
+    font-size:14px;
+  }
+
+  .resultado{
+    padding:18px;
+  }
+
+  .resultado h2{
+    font-size:18px;
+    margin-bottom:12px;
+  }
+
+  .resultado p{
+    font-size:13px;
+    margin-bottom:8px;
   }
 
   #valorFinal{
-    font-size:40px;
+    font-size:26px;
+  }
+
+  .beneficio-card h3{
+    font-size:16px;
+  }
+
+  .beneficio-card p{
+    font-size:12px;
+  }
+}
+
+/* Tela média - Celular/Tablet (481px a 768px) */
+@media(min-width:481px) and (max-width:768px){
+
+  header{
+    padding:30px 10px 20px;
+  }
+
+  header h1{
+    font-size:28px;
+  }
+
+  header p{
+    font-size:13px;
+  }
+
+  .catalogo{
+    padding:10px 15px;
+    gap:15px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+  .produto{
+    width:100%;
+    padding:20px;
+  }
+
+  .produto h2{
+    font-size:26px;
+    margin-bottom:8px;
+  }
+
+  .produto .valor{
+    font-size:30px;
+  }
+
+  .produto span{
+    font-size:11px;
+    margin-top:8px;
+  }
+
+  .chips{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+  }
+
+  .chip{
+    width:100%;
+    padding:18px;
+  }
+
+  .chip h3{
+    font-size:22px;
+    margin-bottom:8px;
+  }
+
+  .chip .valor-chip{
+    font-size:24px;
+  }
+
+  .detalhes{
+    padding:15px;
+  }
+
+  .box{
+    padding:18px;
+    margin-bottom:20px;
+  }
+
+  .box h3{
+    font-size:18px;
+  }
+
+  .box p{
+    font-size:14px;
+  }
+
+  .resultado{
+    padding:25px;
+  }
+
+  .resultado h2{
+    font-size:22px;
+    margin-bottom:15px;
+  }
+
+  .resultado p{
+    font-size:15px;
+    margin-bottom:10px;
+  }
+
+  #valorFinal{
+    font-size:34px;
+  }
+
+  .beneficio-card h3{
+    font-size:20px;
+  }
+
+  .beneficio-card p{
+    font-size:14px;
+  }
+}
+
+/* Tela grande - Tablet/Desktop (769px a 1024px) */
+@media(min-width:769px) and (max-width:1024px){
+
+  .catalogo{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+  .produto{
+    width:100%;
+    padding:25px;
+  }
+
+  .produto h2{
+    font-size:32px;
+  }
+
+  .produto .valor{
+    font-size:36px;
+  }
+
+  .chips{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .chip{
+    width:100%;
+    padding:22px;
+  }
+
+  .chip h3{
+    font-size:28px;
+  }
+
+  .chip .valor-chip{
+    font-size:30px;
+  }
+
+  .resultado h2{
+    font-size:30px;
+  }
+
+  .resultado p{
+    font-size:18px;
+  }
+
+  #valorFinal{
+    font-size:42px;
+  }
+}
+
+/* Tela extra grande - Desktop (acima de 1025px) */
+@media(min-width:1025px){
+
+  .catalogo{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+    padding:15px 30px;
+  }
+
+  .produto{
+    width:100%;
+    padding:30px;
+  }
+
+  .chips{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+    flex-wrap:wrap;
+  }
+
+  .chip{
+    width:100%;
+    padding:25px;
   }
 }
