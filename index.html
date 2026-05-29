@@ -18,25 +18,25 @@
     <section class="catalogo">
 
       <div class="categoria-box">
-        <div class="categoria-header">Banda Larga</div>
+        <div class="categoria-header">Internet</div>
 
         <div class="categoria-itens">
-          <div class="produto" onclick="selecionarInternet('350 Megas', 99.90)">
+          <div class="produto" data-name="350 Megas" data-value="99.90" data-tier="350Megas" onclick="selecionarInternet(this)">
             <h2>350 Megas</h2>
             
           </div>
 
-          <div class="produto" onclick="selecionarInternet('500 Megas', 119.90)">
+          <div class="produto" data-name="500 Megas" data-value="119.90" data-tier="500Megas" onclick="selecionarInternet(this)">
             <h2>500 Megas</h2>
             
           </div>
 
-          <div class="produto" onclick="selecionarInternet('600 Megas', 139.90)">
+          <div class="produto" data-name="600 Megas" data-value="139.90" data-tier="600Megas" onclick="selecionarInternet(this)">
             <h2>600 Megas</h2>
             
           </div>
 
-          <div class="produto" onclick="selecionarInternet('1 Giga', 199.90)">
+          <div class="produto" data-name="1 Giga" data-value="199.90" data-tier="1Giga" onclick="selecionarInternet(this)">
             <h2>1 Giga</h2>
             
           </div>
@@ -47,7 +47,7 @@
         <div class="categoria-header">TV</div>
 
         <div class="categoria-itens">
-          <div class="produto tvbox" onclick="selecionarTvBox('TV Box', 139.90)">
+          <div class="produto tvbox" data-name="TV Box" data-value="139.90" onclick="selecionarTvBox(this)">
             <h2>TV Box</h2>
             
           </div>
@@ -63,12 +63,12 @@
 
         <div class="chips">
 
-          <div class="chip" onclick="selecionarChip('30GB', 49.90)">
+          <div class="chip" data-name="Chip 30GB" data-value="49.90" onclick="selecionarChip(this)">
             <h3>Chip 30GB</h3>
             
           </div>
 
-          <div class="chip" onclick="selecionarChip('50GB', 80.00)">
+          <div class="chip" data-name="Chip 50GB" data-value="80.00" onclick="selecionarChip(this)">
             <h3>Chip 50GB</h3>
             
           </div>
@@ -82,9 +82,10 @@
         <p><strong>Internet:</strong> <span id="nomeInternet">-</span></p>
         <p><strong>Valor Internet:</strong> R$ <span id="valorInternet">0,00</span></p>
 
-        <p><strong>Chip:</strong> <span id="nomeChip">-</span></p>
-        <p><strong>Valor Chip:</strong> R$ <span id="valorChip">0,00</span></p>
+        <p><strong>Plano Móvel:</strong> <span id="nomeChip">-</span></p>
+        <p><strong>Valor Plano Móvel:</strong> R$ <span id="valorChip">0,00</span></p>
 
+        <p><strong>TV Box:</strong> <span id="nomeTvBox">-</span></p>
         <p><strong>Valor TV Box:</strong> R$ <span id="valorTvBox">0,00</span></p>
 
         <hr>

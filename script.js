@@ -1,4 +1,5 @@
 let internetNome = "";
+let internetTier = "";
 let internetValor = 0;
 let internetValorOriginal = 0;
 let produtoSelecionado = null;
@@ -13,38 +14,25 @@ let tvBoxValorOriginal = 0;
 let tvBoxSelecionado = null;
 
 // Preços com desconto ao combinar com chip
-const desconto350Megas = 79.90;
-const desconto500Megas = 99.90;
-const desconto600Megas = 99.90;
-const desconto1Giga = 149.90;
+const descontoPorPlano = {
+  "350Megas": 79.90,
+  "500Megas": 99.90,
+  "600Megas": 99.90,
+  "1Giga": 149.90,
+};
 const descontoTvBoxComCombo = 119.90;
 const descontoTvBoxComTres = 99.90;
 
 function atualizarPrecoInternet() {
-  if (internetNome === "") {
+  if (internetTier === "") {
     internetValor = 0;
     return;
   }
 
   const possuiCombo = chipSelecionado || tvBoxSelecionado;
 
-  if (internetNome === "350 Megas") {
-    internetValor = possuiCombo ? desconto350Megas : internetValorOriginal;
-    return;
-  }
-
-  if (internetNome === "500 Megas") {
-    internetValor = possuiCombo ? desconto500Megas : internetValorOriginal;
-    return;
-  }
-
-  if (internetNome === "600 Megas") {
-    internetValor = possuiCombo ? desconto600Megas : internetValorOriginal;
-    return;
-  }
-
-  if (internetNome === "1 Giga") {
-    internetValor = possuiCombo ? desconto1Giga : internetValorOriginal;
+  if (descontoPorPlano[internetTier] !== undefined) {
+    internetValor = possuiCombo ? descontoPorPlano[internetTier] : internetValorOriginal;
     return;
   }
 
@@ -75,91 +63,82 @@ function atualizarPrecoTvBox() {
   tvBoxValor = tvBoxValorOriginal;
 }
 
-function selecionarInternet(nome, valor) {
-  const produtos = document.querySelectorAll(".produto");
-  
-  // Se clicou no mesmo produto, desseleciona
-  if (produtoSelecionado && produtoSelecionado.textContent.includes(nome)) {
-    produtoSelecionado.classList.remove("selecionado");
+function selecionarInternet(elemento) {
+  const produto = elemento;
+  const nome = produto.dataset.name;
+  const valor = Number(produto.dataset.value);
+  const tier = produto.dataset.tier;
+
+  if (produtoSelecionado === produto) {
+    produto.classList.remove("selecionado");
     produtoSelecionado = null;
     internetNome = "";
+    internetTier = "";
     internetValorOriginal = 0;
     internetValor = 0;
     atualizarPrecoTvBox();
     atualizarResumo();
     return;
   }
-  
-  // Remove seleção anterior
+
   if (produtoSelecionado) {
     produtoSelecionado.classList.remove("selecionado");
   }
-  
-  // Encontra e seleciona o novo produto
-  const produtoAtual = Array.from(produtos).find(p => p.textContent.includes(nome));
-  if (produtoAtual) {
-    produtoAtual.classList.add("selecionado");
-    produtoSelecionado = produtoAtual;
-  }
-  
+
+  produto.classList.add("selecionado");
+  produtoSelecionado = produto;
+
   internetNome = nome;
-  internetValorOriginal = valor; // Armazena o valor original
+  internetTier = tier;
+  internetValorOriginal = valor;
   atualizarPrecoInternet();
   atualizarPrecoTvBox();
 
   atualizarResumo();
 }
 
-function selecionarChip(nome, valor) {
-  const chips = document.querySelectorAll(".chip");
-  
-  // Se clicou no mesmo chip, desseleciona
-  if (chipSelecionado && chipSelecionado.textContent.includes(nome)) {
-    chipSelecionado.classList.remove("selecionado");
+function selecionarChip(elemento) {
+  const chip = elemento;
+  const nome = chip.dataset.name;
+  const valor = Number(chip.dataset.value);
+
+  if (chipSelecionado === chip) {
+    chip.classList.remove("selecionado");
     chipSelecionado = null;
     chipNome = "";
     chipValor = 0;
     atualizarPrecoInternet();
     atualizarPrecoTvBox();
-    document.getElementById("nomeChip").innerText = "-";
-    document.getElementById("valorChip").innerText = "0,00";
     atualizarResumo();
     return;
   }
-  
-  // Remove seleção anterior
+
   if (chipSelecionado) {
     chipSelecionado.classList.remove("selecionado");
   }
-  
-  // Encontra e seleciona o novo chip
-  const chipAtual = Array.from(chips).find(c => c.textContent.includes(nome));
-  if (chipAtual) {
-    chipAtual.classList.add("selecionado");
-    chipSelecionado = chipAtual;
-  }
-  
+
+  chip.classList.add("selecionado");
+  chipSelecionado = chip;
+
   chipNome = nome;
   chipValor = valor;
   atualizarPrecoInternet();
   atualizarPrecoTvBox();
 
-  document.getElementById("nomeChip").innerText = chipNome;
-  document.getElementById("valorChip").innerText =
-    chipValor.toFixed(2).replace('.', ',');
-
   atualizarResumo();
 }
 
-function selecionarTvBox(nome, valor) {
-  const tvBoxes = document.querySelectorAll(".tvbox");
+function selecionarTvBox(elemento) {
+  const tvBox = elemento;
+  const nome = tvBox.dataset.name;
+  const valor = Number(tvBox.dataset.value);
 
-  if (tvBoxSelecionado && tvBoxSelecionado.textContent.includes(nome)) {
-    tvBoxSelecionado.classList.remove("selecionado");
+  if (tvBoxSelecionado === tvBox) {
+    tvBox.classList.remove("selecionado");
     tvBoxSelecionado = null;
     tvBoxNome = "";
     tvBoxValor = 0;
-    document.getElementById("valorTvBox").innerText = "0,00";
+    tvBoxValorOriginal = 0;
     atualizarPrecoInternet();
     atualizarPrecoTvBox();
     atualizarResumo();
@@ -170,18 +149,12 @@ function selecionarTvBox(nome, valor) {
     tvBoxSelecionado.classList.remove("selecionado");
   }
 
-  const tvBoxAtual = Array.from(tvBoxes).find(t => t.textContent.includes(nome));
-  if (tvBoxAtual) {
-    tvBoxAtual.classList.add("selecionado");
-    tvBoxSelecionado = tvBoxAtual;
-  }
+  tvBox.classList.add("selecionado");
+  tvBoxSelecionado = tvBox;
 
   tvBoxNome = nome;
   tvBoxValorOriginal = valor;
   atualizarPrecoTvBox();
-
-  document.getElementById("valorTvBox").innerText =
-    tvBoxValor.toFixed(2).replace('.', ',');
 
   atualizarResumo();
 }
@@ -192,8 +165,14 @@ function formatarValor(valor) {
 
 function enviarWhatsapp() {
   const total = internetValor + chipValor + tvBoxValor;
+  const planoEscolhido = [
+    internetNome || "Nenhuma internet",
+    chipNome || "Sem chip",
+    tvBoxNome || "Sem TV Box"
+  ].join(" / ");
+
   const mensagem =
-    `Olá, quero contratar:\n\n` +
+    `Bom dia! Quero contratar o plano: ${planoEscolhido}.\n\n` +
     `Internet: ${internetNome || "Nenhuma"}\n` +
     `Chip: ${chipNome || "Nenhum"}\n` +
     `TV Box: ${tvBoxNome || "Nenhuma"}\n\n` +
@@ -208,14 +187,15 @@ function enviarWhatsapp() {
 function atualizarResumo() {
   let total = internetValor + chipValor + tvBoxValor;
 
-  document.getElementById("nomeInternet").innerText = internetNome;
+  document.getElementById("nomeInternet").innerText = internetNome || "-";
   document.getElementById("valorInternet").innerText =
     formatarValor(internetValor);
 
-  document.getElementById("nomeChip").innerText = chipNome;
+  document.getElementById("nomeChip").innerText = chipNome || "-";
   document.getElementById("valorChip").innerText =
     formatarValor(chipValor);
 
+  document.getElementById("nomeTvBox").innerText = tvBoxNome || "-";
   document.getElementById("valorTvBox").innerText =
     formatarValor(tvBoxValor);
 
