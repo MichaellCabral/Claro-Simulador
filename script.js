@@ -7,10 +7,73 @@ let chipNome = "";
 let chipValor = 0;
 let chipSelecionado = null;
 
+let tvBoxNome = "";
+let tvBoxValor = 0;
+let tvBoxValorOriginal = 0;
+let tvBoxSelecionado = null;
+
 // Preços com desconto ao combinar com chip
 const desconto350Megas = 79.90;
 const desconto500Megas = 99.90;
+const desconto600Megas = 99.90;
 const desconto1Giga = 149.90;
+const descontoTvBoxComCombo = 119.90;
+const descontoTvBoxComTres = 99.90;
+
+function atualizarPrecoInternet() {
+  if (internetNome === "") {
+    internetValor = 0;
+    return;
+  }
+
+  const possuiCombo = chipSelecionado || tvBoxSelecionado;
+
+  if (internetNome === "350 Megas") {
+    internetValor = possuiCombo ? desconto350Megas : internetValorOriginal;
+    return;
+  }
+
+  if (internetNome === "500 Megas") {
+    internetValor = possuiCombo ? desconto500Megas : internetValorOriginal;
+    return;
+  }
+
+  if (internetNome === "600 Megas") {
+    internetValor = possuiCombo ? desconto600Megas : internetValorOriginal;
+    return;
+  }
+
+  if (internetNome === "1 Giga") {
+    internetValor = possuiCombo ? desconto1Giga : internetValorOriginal;
+    return;
+  }
+
+  internetValor = internetValorOriginal;
+}
+
+function atualizarPrecoTvBox() {
+  atualizarPrecoInternet();
+
+  if (!tvBoxSelecionado) {
+    tvBoxValor = 0;
+    return;
+  }
+
+  const possuiInternet = internetNome !== "";
+  const possuiChip = chipNome !== "";
+
+  if (possuiInternet && possuiChip) {
+    tvBoxValor = descontoTvBoxComTres;
+    return;
+  }
+
+  if (possuiInternet || possuiChip) {
+    tvBoxValor = descontoTvBoxComCombo;
+    return;
+  }
+
+  tvBoxValor = tvBoxValorOriginal;
+}
 
 function selecionarInternet(nome, valor) {
   const produtos = document.querySelectorAll(".produto");
@@ -20,8 +83,9 @@ function selecionarInternet(nome, valor) {
     produtoSelecionado.classList.remove("selecionado");
     produtoSelecionado = null;
     internetNome = "";
+    internetValorOriginal = 0;
     internetValor = 0;
-    document.getElementById("internetSelecionada").innerHTML = "Nenhuma selecionada";
+    atualizarPrecoTvBox();
     atualizarResumo();
     return;
   }
@@ -39,11 +103,9 @@ function selecionarInternet(nome, valor) {
   }
   
   internetNome = nome;
-  internetValor = valor;
   internetValorOriginal = valor; // Armazena o valor original
-
-  document.getElementById("internetSelecionada").innerHTML =
-    `${nome} - R$ ${valor.toFixed(2).replace('.', ',')}`;
+  atualizarPrecoInternet();
+  atualizarPrecoTvBox();
 
   atualizarResumo();
 }
@@ -57,10 +119,8 @@ function selecionarChip(nome, valor) {
     chipSelecionado = null;
     chipNome = "";
     chipValor = 0;
-    // Remove desconto de 350 Megas, 500 Megas ou 1 Giga quando chip é deseleccionado
-    if (internetNome === "350 Megas" || internetNome === "500 Megas" || internetNome === "1 Giga") {
-      internetValor = internetValorOriginal;
-    }
+    atualizarPrecoInternet();
+    atualizarPrecoTvBox();
     document.getElementById("nomeChip").innerText = "-";
     document.getElementById("valorChip").innerText = "0,00";
     atualizarResumo();
@@ -81,19 +141,8 @@ function selecionarChip(nome, valor) {
   
   chipNome = nome;
   chipValor = valor;
-
-  // Aplica desconto para 350 Megas quando combinado com chip
-  if (internetNome === "350 Megas") {
-    internetValor = desconto350Megas;
-  }
-  // Aplica desconto para 500 Megas quando combinado com chip
-  if (internetNome === "500 Megas") {
-    internetValor = desconto500Megas;
-  }
-  // Aplica desconto para 1 Giga quando combinado com chip
-  if (internetNome === "1 Giga") {
-    internetValor = desconto1Giga;
-  }
+  atualizarPrecoInternet();
+  atualizarPrecoTvBox();
 
   document.getElementById("nomeChip").innerText = chipNome;
   document.getElementById("valorChip").innerText =
@@ -102,8 +151,43 @@ function selecionarChip(nome, valor) {
   atualizarResumo();
 }
 
+function selecionarTvBox(nome, valor) {
+  const tvBoxes = document.querySelectorAll(".tvbox");
+
+  if (tvBoxSelecionado && tvBoxSelecionado.textContent.includes(nome)) {
+    tvBoxSelecionado.classList.remove("selecionado");
+    tvBoxSelecionado = null;
+    tvBoxNome = "";
+    tvBoxValor = 0;
+    document.getElementById("valorTvBox").innerText = "0,00";
+    atualizarPrecoInternet();
+    atualizarPrecoTvBox();
+    atualizarResumo();
+    return;
+  }
+
+  if (tvBoxSelecionado) {
+    tvBoxSelecionado.classList.remove("selecionado");
+  }
+
+  const tvBoxAtual = Array.from(tvBoxes).find(t => t.textContent.includes(nome));
+  if (tvBoxAtual) {
+    tvBoxAtual.classList.add("selecionado");
+    tvBoxSelecionado = tvBoxAtual;
+  }
+
+  tvBoxNome = nome;
+  tvBoxValorOriginal = valor;
+  atualizarPrecoTvBox();
+
+  document.getElementById("valorTvBox").innerText =
+    tvBoxValor.toFixed(2).replace('.', ',');
+
+  atualizarResumo();
+}
+
 function atualizarResumo() {
-  let total = internetValor + chipValor;
+  let total = internetValor + chipValor + tvBoxValor;
 
   document.getElementById("nomeInternet").innerText = internetNome;
   document.getElementById("valorInternet").innerText =
@@ -113,6 +197,11 @@ function atualizarResumo() {
   document.getElementById("valorChip").innerText =
     chipValor.toFixed(2).replace('.', ',');
 
+  document.getElementById("valorTvBox").innerText =
+    tvBoxValor.toFixed(2).replace('.', ',');
+
   document.getElementById("valorFinal").innerText =
     total.toFixed(2).replace('.', ',');
 }
+
+atualizarResumo();
