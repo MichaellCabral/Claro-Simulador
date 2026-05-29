@@ -186,22 +186,41 @@ function selecionarTvBox(nome, valor) {
   atualizarResumo();
 }
 
+function formatarValor(valor) {
+  return valor.toFixed(2).replace('.', ',');
+}
+
+function enviarWhatsapp() {
+  const total = internetValor + chipValor + tvBoxValor;
+  const mensagem =
+    `Olá, quero contratar:\n\n` +
+    `Internet: ${internetNome || "Nenhuma"}\n` +
+    `Chip: ${chipNome || "Nenhum"}\n` +
+    `TV Box: ${tvBoxNome || "Nenhuma"}\n\n` +
+    `Total: R$ ${formatarValor(total)}`;
+
+  const whatsappBase = "https://wa.me/message/ZMXY7NP6B32AD1";
+  const url = `${whatsappBase}?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(url, "_blank");
+}
+
 function atualizarResumo() {
   let total = internetValor + chipValor + tvBoxValor;
 
   document.getElementById("nomeInternet").innerText = internetNome;
   document.getElementById("valorInternet").innerText =
-    internetValor.toFixed(2).replace('.', ',');
+    formatarValor(internetValor);
 
   document.getElementById("nomeChip").innerText = chipNome;
   document.getElementById("valorChip").innerText =
-    chipValor.toFixed(2).replace('.', ',');
+    formatarValor(chipValor);
 
   document.getElementById("valorTvBox").innerText =
-    tvBoxValor.toFixed(2).replace('.', ',');
+    formatarValor(tvBoxValor);
 
   document.getElementById("valorFinal").innerText =
-    total.toFixed(2).replace('.', ',');
+    formatarValor(total);
 }
 
 atualizarResumo();
