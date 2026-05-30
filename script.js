@@ -13,6 +13,10 @@ let tvBoxValor = 0;
 let tvBoxValorOriginal = 0;
 let tvBoxSelecionado = null;
 
+let hexaNome = "";
+let hexaValor = 0;
+let hexaSelecionado = null;
+
 // Preços com desconto ao combinar com chip
 const descontoPorPlano = {
   "350Megas": 79.90,
@@ -159,23 +163,52 @@ function selecionarTvBox(elemento) {
   atualizarResumo();
 }
 
+function selecionarHexa(elemento) {
+  const hexa = elemento;
+  const nome = hexa.dataset.name;
+  const valor = Number(hexa.dataset.value);
+
+  if (hexaSelecionado === hexa) {
+    hexa.classList.remove("selecionado");
+    hexaSelecionado = null;
+    hexaNome = "";
+    hexaValor = 0;
+    atualizarResumo();
+    return;
+  }
+
+  if (hexaSelecionado) {
+    hexaSelecionado.classList.remove("selecionado");
+  }
+
+  hexa.classList.add("selecionado");
+  hexaSelecionado = hexa;
+
+  hexaNome = nome;
+  hexaValor = valor;
+
+  atualizarResumo();
+}
+
 function formatarValor(valor) {
   return valor.toFixed(2).replace('.', ',');
 }
 
 function enviarWhatsapp() {
-  const total = internetValor + chipValor + tvBoxValor;
+  const total = internetValor + chipValor + tvBoxValor + hexaValor;
   const planoEscolhido = [
     internetNome || "Nenhuma internet",
     chipNome || "Sem chip",
-    tvBoxNome || "Sem TV Box"
+    tvBoxNome || "Sem TV Box",
+    hexaNome || "Sem Bônus Hexa"
   ].join(" / ");
 
   const mensagem =
     `Bom dia! Quero contratar o plano: ${planoEscolhido}.\n\n` +
     `Internet: ${internetNome || "Nenhuma"}\n` +
     `Chip: ${chipNome || "Nenhum"}\n` +
-    `TV Box: ${tvBoxNome || "Nenhuma"}\n\n` +
+    `TV Box: ${tvBoxNome || "Nenhuma"}\n` +
+    `Bônus Hexa: ${hexaNome || "Nenhum"}\n\n` +
     `Total: R$ ${formatarValor(total)}`;
 
   const whatsappBase = "https://wa.me/message/ZMXY7NP6B32AD1";
@@ -185,7 +218,7 @@ function enviarWhatsapp() {
 }
 
 function atualizarResumo() {
-  let total = internetValor + chipValor + tvBoxValor;
+  let total = internetValor + chipValor + tvBoxValor + hexaValor;
 
   document.getElementById("nomeInternet").innerText = internetNome || "-";
   document.getElementById("valorInternet").innerText =
@@ -197,6 +230,10 @@ function atualizarResumo() {
 
   document.getElementById("valorTvBox").innerText =
     formatarValor(tvBoxValor);
+
+  document.getElementById("nomeHexa").innerText = hexaNome || "-";
+  document.getElementById("valorHexa").innerText =
+    formatarValor(hexaValor);
 
   document.getElementById("valorFinal").innerText =
     formatarValor(total);
