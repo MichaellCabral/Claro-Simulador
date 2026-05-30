@@ -195,7 +195,6 @@ function atualizarResumo() {
   document.getElementById("valorChip").innerText =
     formatarValor(chipValor);
 
-  document.getElementById("nomeTvBox").innerText = tvBoxNome || "-";
   document.getElementById("valorTvBox").innerText =
     formatarValor(tvBoxValor);
 
