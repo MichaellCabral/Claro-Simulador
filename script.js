@@ -53,8 +53,9 @@ function atualizarPrecoTvBox() {
 
   const possuiInternet = internetNome !== "";
   const possuiChip = chipNome !== "";
+  const possuiHexa = hexaNome !== "";
 
-  if (possuiInternet && possuiChip) {
+  if ((possuiInternet && possuiChip) || possuiHexa) {
     tvBoxValor = descontoTvBoxComTres;
     return;
   }
@@ -173,6 +174,7 @@ function selecionarHexa(elemento) {
     hexaSelecionado = null;
     hexaNome = "";
     hexaValor = 0;
+    atualizarPrecoTvBox();
     atualizarResumo();
     return;
   }
@@ -187,6 +189,7 @@ function selecionarHexa(elemento) {
   hexaNome = nome;
   hexaValor = valor;
 
+  atualizarPrecoTvBox();
   atualizarResumo();
 }
 
