@@ -33,7 +33,7 @@ function atualizarPrecoInternet() {
     return;
   }
 
-  const possuiCombo = chipSelecionado || tvBoxSelecionado;
+  const possuiCombo = chipSelecionado || tvBoxSelecionado || hexaSelecionado;
 
   if (descontoPorPlano[internetTier] !== undefined) {
     internetValor = possuiCombo ? descontoPorPlano[internetTier] : internetValorOriginal;

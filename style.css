@@ -71,6 +71,13 @@ header p{
   margin-bottom:20px;
 }
 
+.categoria-descricao{
+  color:#ffd5d5;
+  font-size:16px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
 .categoria-itens{
   display:flex;
   flex-wrap:wrap;
@@ -167,6 +174,10 @@ header p{
   box-shadow:0 0 20px #ff000055;
 }
 
+.hexa-box{
+  margin-bottom:30px;
+}
+
 .box h3{
   color:#ffd000;
   margin-bottom:10px;
@@ -176,10 +187,6 @@ header p{
 /* CHIPS */
 
 .mobile-box{
-  margin-bottom:30px;
-}
-
-.hexa-box{
   margin-bottom:30px;
 }
 
